@@ -4,15 +4,21 @@ Data:
 
 (Action Recognition)
 1. Training: entire UCF action data set. It consists of 101 human action categories with 13,320 videos in total. Each category has more than 100 video clips, all of which are temporally trimmed.
+
 2. Validation data: There are 1,000 videos in total provided for 101 action classes as validation data (each class has exactly 10 videos). In general, there is one primary action class shown in each video; however, some videos may include one or more instances from other action classes.
+
 3. Background data: 2,500 videos, which are verified to make sure they do not include an instance of any of the 101 action classes, are provided as background. Each video is relevant to one of the action classes. For instance, the background videos related to the ac-tion class “Basketball Dunk” may show the basketball court when the game is not being played.
+
 4. 1,574 temporally untrimmed videos are provided as the test data. Some videos may contain one or multiple instances from one or multiple action classes, and some videos may not include any actions from the 101 classes. A significant portion of the video may not include any particular action, and multiple instances may occur at differnet time stamps within the video.
 
 (Action Detection)
 
 1. Training: A subset of UCF101 action dataset with 20 action classes is used for training. The remaining action classes in UCF101 may also be used for training, if desired.
+
 2. 200 videos from 20 action classes are provided as the validation set. These videos have the same properties as the validation videos in the recognition task. The validation set could be added to the training data, if desired.
+
 3. Background: same as before.
+
 4. Same format as validation.
 
 Result format:

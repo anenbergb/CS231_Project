@@ -7,14 +7,15 @@ import subprocess, re, os
 avconv = 'avconv'
 
 # test
-def basicResize(videoName,resizedName):
+def basicResize(videoName,resizedName,height=320,width=240):
     if not os.path.exists(videoName):
         print '%s does not exist!' % videoName
         return False
-
+    dims = '%dx%d'%(height,width)
     # call avconv again to resize
-    subprocess.call([avconv, '-i', videoName, '-s', '320x240', '-b', '64k', resizedName])
+    subprocess.call([avconv, '-i', videoName, '-s', dims, '-b', '64ka', resizedName])
     return check(resizedName)
+
 
 # resize videoName to 320x240 and store in resizedName
 # if succeed return True

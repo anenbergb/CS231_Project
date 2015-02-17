@@ -1,16 +1,16 @@
-name: "UCFff10_quick"
+name: "quick"
 layers {
-  name: "UCFff10"
+  name: "quick"
   type: DATA
   top: "data"
   top: "label"
   data_param {
     source: "./train_lmdb"
     backend: LMDB
-    batch_size: 100
+    batch_size: 1000
   }
   transform_param {
-    mean_file: "./UCFff10_mean.binaryproto"
+    mean_file: "./mean.binaryproto"
   }
   include: { phase: TRAIN }
 }
@@ -22,10 +22,10 @@ layers {
   data_param {
     source: "./val_lmdb"
     backend: LMDB
-    batch_size: 100
+    batch_size: 1000
   }
   transform_param {
-    mean_file: "./UCFff10_mean.binaryproto"
+    mean_file: "./mean.binaryproto"
   }
   include: { phase: TEST }
 }
@@ -169,7 +169,7 @@ layers {
   blobs_lr: 1
   blobs_lr: 2
   inner_product_param {
-    num_output: 102
+    num_output: 101
     weight_filler {
       type: "gaussian"
       std: 0.1
@@ -179,17 +179,7 @@ layers {
     }
   }
 }
-layers {
-  name: "hdf5out"
-  type: HDF5_OUTPUT
-  bottom: "ip2"
-  bottom: "label"
-  hdf5_output_param {
-    file_name: "dummy_output.h5"
-  }
-  include: { phase: TEST }
 
-}
 layers {
   name: "accuracy"
   type: ACCURACY

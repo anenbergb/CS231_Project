@@ -1,34 +1,9 @@
-name: "UCFff10_quick"
-layers {
-  name: "UCFff10"
-  type: DATA
-  top: "data"
-  top: "label"
-  data_param {
-    source: "./train_lmdb"
-    backend: LMDB
-    batch_size: 100
-  }
-  transform_param {
-    mean_file: "./UCFff10_mean.binaryproto"
-  }
-  include: { phase: TRAIN }
-}
-layers {
-  name: "UCFff10"
-  type: DATA
-  top: "data"
-  top: "label"
-  data_param {
-    source: "./val_lmdb"
-    backend: LMDB
-    batch_size: 100
-  }
-  transform_param {
-    mean_file: "./UCFff10_mean.binaryproto"
-  }
-  include: { phase: TEST }
-}
+name: "quick_test"
+input: "data"
+input_dim: 1
+input_dim: 3
+input_dim: 32
+input_dim: 32
 layers {
   name: "conv1"
   type: CONVOLUTION
@@ -41,13 +16,6 @@ layers {
     pad: 2
     kernel_size: 5
     stride: 1
-    weight_filler {
-      type: "gaussian"
-      std: 0.0001
-    }
-    bias_filler {
-      type: "constant"
-    }
   }
 }
 layers {
@@ -79,13 +47,6 @@ layers {
     pad: 2
     kernel_size: 5
     stride: 1
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-    }
   }
 }
 layers {
@@ -117,13 +78,6 @@ layers {
     pad: 2
     kernel_size: 5
     stride: 1
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-    }
   }
 }
 layers {
@@ -152,13 +106,6 @@ layers {
   blobs_lr: 2
   inner_product_param {
     num_output: 64
-    weight_filler {
-      type: "gaussian"
-      std: 0.1
-    }
-    bias_filler {
-      type: "constant"
-    }
   }
 }
 layers {
@@ -169,40 +116,12 @@ layers {
   blobs_lr: 1
   blobs_lr: 2
   inner_product_param {
-    num_output: 102
-    weight_filler {
-      type: "gaussian"
-      std: 0.1
-    }
-    bias_filler {
-      type: "constant"
-    }
+    num_output: 101
   }
 }
 layers {
-  name: "hdf5out"
-  type: HDF5_OUTPUT
+  name: "prob"
+  type: SOFTMAX
   bottom: "ip2"
-  bottom: "label"
-  hdf5_output_param {
-    file_name: "dummy_output.h5"
-  }
-  include: { phase: TEST }
-
-}
-layers {
-  name: "accuracy"
-  type: ACCURACY
-  bottom: "ip2"
-  bottom: "label"
-  top: "accuracy"
-  include: { phase: TEST }
-}
-
-layers {
-  name: "loss"
-  type: SOFTMAX_LOSS
-  bottom: "ip2"
-  bottom: "label"
-  top: "loss"
+  top: "prob"
 }
