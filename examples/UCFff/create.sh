@@ -19,8 +19,8 @@ VAL_DATA_ROOT=/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/firstF
 # already been resized using another tool.
 RESIZE=true
 if $RESIZE; then
-  RESIZE_HEIGHT=32
-  RESIZE_WIDTH=32
+  RESIZE_HEIGHT=224
+  RESIZE_WIDTH=224
 else
   RESIZE_HEIGHT=0
   RESIZE_WIDTH=0
@@ -48,7 +48,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --shuffle \
     $TRAIN_DATA_ROOT \
     $DATA/UCF_train.txt \
-    $EXAMPLE/train_lmdb
+    $EXAMPLE/train_lmdb224
 
 echo "Creating val lmdb..."
 
@@ -58,6 +58,6 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --shuffle \
     $VAL_DATA_ROOT \
     $DATA/UCF_test.txt \
-    $EXAMPLE/val_lmdb
+    $EXAMPLE/val_lmdb224
 
 echo "Done."

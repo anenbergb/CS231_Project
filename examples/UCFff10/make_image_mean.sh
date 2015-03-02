@@ -10,7 +10,9 @@ CAFFE=/afs/cs.stanford.edu/u/anenberg/scr/caffe
 $CAFFE/build/tools/compute_image_mean train_lmdb \
  UCFff10_mean.binaryproto
 
+echo 'Make the numpy mean file'
 
+python ../../convert_protomean.py UCFff10_mean.binaryproto mean.npy
 
 
 echo "Done."

@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "./train_lmdb"
     backend: LMDB
-    batch_size: 1000
+    batch_size: 100
   }
   transform_param {
     mean_file: "./mean.binaryproto"
@@ -22,7 +22,7 @@ layers {
   data_param {
     source: "./val_lmdb"
     backend: LMDB
-    batch_size: 1000
+    batch_size: 100
   }
   transform_param {
     mean_file: "./mean.binaryproto"

@@ -1,1 +1,4 @@
-#*.mdb
+*.mdb
+*.jpg
+*.caffemodel
+*.solverstate
