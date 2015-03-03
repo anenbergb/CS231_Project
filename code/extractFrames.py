@@ -17,7 +17,7 @@ The videos are extracted by frame in .jpg format.
 Hard coded in : 224x224 format.
 
 """
-import os, csv, sys, argparse
+import os, csv, sys, argparse, pickle
 import avconv
 
 
@@ -38,20 +38,26 @@ def frames_from_vids(listname, dataDir):
     # /afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Validation/Frames
     head,tail = os.path.split(dataDir)
     if tail=="": #if the original dataDir ended in a /
-        #now gab the path up to  /../THUMOS2014/Validation/
+        #now grab the path up to  /../THUMOS2014/Validation/
         head,tail = os.path.split(head) 
     framesDir = os.path.join(head,"Frames")
     if not os.path.isdir(framesDir):
         os.makedirs(framesDir)
+
 
     vid_to_extract = []
     #with open(listname, 'r+') as f:
     f = open(listname, 'r+')
     data = csv.reader(f, delimiter=' ')
     for row in data:
-        #e.g, filename.avi we want filename
+        #e.g, [filename.avi 10] we want filename.avi
         videoName = row[0]
-        vid_to_extract.append(videoName)
+        #the ['vid_name'] could have a '/' which we want to remove.
+        # or the ['vid_name'] might not have an extension. In this case we will add .mp4
+        name=os.path.basename(videoName)
+        if '.' not in name:
+            name = name+'.mp4'
+        vid_to_extract.append(name)
     f.close()
 
     for vid in vid_to_extract:
@@ -62,10 +68,10 @@ def frames_from_vids(listname, dataDir):
         videoFramesDir = os.path.join(framesDir,name)
         if not os.path.exists(videoFramesDir):
             #If we have not yet extracted frames for this video
-            avconv.extractFrames(full_vid_path,videoFramesDir,format='jpg',resize='224x224')
-    
-
-
+            frame_to_ts = avconv.extract_frame_ts(full_vid_path,videoFramesDir,format='jpg',resize='224x224',withTS=True)
+            pickle_save_path = os.path.join(videoFramesDir,"time_stamp_map.pkl")
+            with open(pickle_save_path,'w+') as f:
+                pickle.dump(frame_to_ts,f)
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()

@@ -162,13 +162,17 @@ def extract_frames_jpg(video,dataSetDir):
     p = subprocess.call([avconv, '-i', video, JPG_dir+'/%08d.jpg'])
     return p
 
-def extractFrames(video,vidFrameDir, format='jpg', resize=None):
+def extract_frame_ts(video,vidFrameDir, format='jpg', resize=None, withTS=True):
     """
     Splits the video into frames of the specified format
 
     video: input video (full path to file)
     vidFrameDir: full path to the directory to store the
                 .jpg frames.
+
+    if withTS is True, then returns a dictionary of frame to time stamp.
+    frame_to_ts: dictionary of frame to time stamp.
+            e.g.    00000001.jpg : 0.4
 
     """
     #forces extracted frames to be 320x240 dim.
@@ -179,11 +183,37 @@ def extractFrames(video,vidFrameDir, format='jpg', resize=None):
     if not os.path.isdir(vidFrameDir):
         os.makedirs(vidFrameDir)
     # call avconv and grab its stderr output
-    vid_type = '/'+'%05d.'+format
+    vid_type = '/'+'%08d.'+format
+    framePath = vidFrameDir+vid_type
 
-    if resize is not None:
-        #e.g., resize='224x224'
-        p = subprocess.call([avconv, '-i', video, '-s', resize, vidFrameDir+vid_type])
+    if not withTS:
+        if resize is not None:
+            #e.g., resize='224x224'
+            p = subprocess.call([avconv, '-i', video, '-s', resize, framePath])
+        else:
+            p = subprocess.call([avconv, '-i', video, framePath])
     else:
-        p = subprocess.call([avconv, '-i', video, vidFrameDir+vid_type])
-    return p
+        ##Now we must return a dictionary of frame to time stamp.
+        if resize is not None:
+            p = subprocess.Popen(['avconv', '-i', video, '-s', resize,'-an', '-vf', 'showinfo', framePath],
+                         stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        else:
+            p = subprocess.Popen(['avconv', '-i', video, '-an', '-vf', 'showinfo', framePath],
+                         stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        out, err = p.communicate()
+        frame_to_ts = {}
+        maxI = 0
+        for l in err.split('\n'):
+            if l[:9] =='[showinfo' and 'n:' in l:
+                #The .jpg files are saved with +1 offset
+                frameIndex = int(l.split(' ')[3].split(':')[1]) +1
+                timeStamp = float(l.split(' ')[5].split(':')[1])
+                
+                frame_to_ts[frameIndex] = timeStamp
+                if frameIndex > maxI:
+                    maxI = frameIndex
+        
+        #Remove the max, entry in each of the maps. It is an invalid frame.
+        del frame_to_ts[maxI]
+        return frame_to_ts
+    

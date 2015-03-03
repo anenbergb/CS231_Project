@@ -41,11 +41,19 @@ Notes:
 
 make tools
 1. Modifying Caffe in order to read in files to lmdb listed in a directory. Using Boost
+/src/caffe/tools/convert_imageset_dirs.cpp
+/src/caffe/util/io.cpp
 
 2. Had to modify the makefile at line 319
 -lboost_filesystem -lboost_system
 
 3. Moified the io.hpp file to add the ReadImagesToDatum function from the io.cpp
-
+ /caffe/include/caffe/util/io.hpp
 
 NEED to modifiy ReadImagesToDatum in io.cpp in order to concatenate the full file name.
+
+
+To test the this new method, create a directory: Train_checkingCaffe
+ln -s /afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/Frames/v_ApplyEyeMakeup_g01_c01/ ./v_ApplyEyeMakeup_g01_c01
+
+ln -s /afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Validation/Frames/video_validation_0000005 ./video_validation_0000005

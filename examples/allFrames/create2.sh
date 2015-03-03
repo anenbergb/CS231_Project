@@ -8,7 +8,7 @@ EXAMPLE=$PROJECT/examples/allFrames
 DATA=$PROJECT/data/allFrames
 TOOLS=$CAFFE/build/tools
 
-TRAIN_DATA_ROOT=$DATA"/Train_small/"
+TRAIN_DATA_ROOT=$DATA"/Train_checkingCaffe/"
 
 
 
@@ -40,8 +40,8 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $TRAIN_DATA_ROOT \
-    $DATA/UCF_small.txt \
-    $EXAMPLE/UCF_small_Mar1
+    $DATA/checkingCaffe_list.txt \
+    $EXAMPLE/lmdb_checkingCaffe
 
 echo "Creating val lmdb..."
 

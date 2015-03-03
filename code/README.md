@@ -17,11 +17,7 @@ deprecated
 
 4. makeNameIndexMap.py
 Script to build a map from the video name to the associated class index.
-
 Note, the 101 classes are 1 indexed. 0 class index is considered "background"
-map = class_index.pkl: contains map from class name to index, and verse as well.
-map[0] = map from class name to index. map[0]['applyeyemakeup'] = 1
-map[1] = map from class index to the class
 
 map = UCF_vidmap.pkl
 map[0] = map from class index to list of videos with that index.
@@ -31,4 +27,19 @@ same format for the following maps.
 VALID_vidmap.pkl
 TEST_vidmap.pkl
 
+5. makeUCF101_class_index_map.py
+map = class_index.pkl: contains map from class name to index, and verse as well.
+map[0] = map from class name to index. map[0]['applyeyemakeup'] = 1
+map[1] = map from class index to the class
 
+
+
+Simple bash loop:
+for d in $UCF_Frames
+do
+	for f in $d
+	do
+		for cp $f 
+	done
+done
+ 
