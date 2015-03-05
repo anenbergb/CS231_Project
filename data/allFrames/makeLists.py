@@ -11,9 +11,9 @@ import subprocess, os, pickle, csv, argparse
 
 
 ##HARD coded in the dictionaries from the video name to the class index.
-UCF_vidmap_PATH = "../UCF_vidmap.pkl"
-VALID_vidmap_PATH = "../VALID_vidmap.pkl"
-TEST_vidmap_PATH = "../TEST_vidmap.pkl"
+UCF_vidmap_PATH = "./UCF_vidmap.pkl"
+VALID_vidmap_PATH = "./VALID_vidmap.pkl"
+TEST_vidmap_PATH = "./TEST_vidmap.pkl"
 
 
 UCF_vidmap = pickle.load( open(UCF_vidmap_PATH, "rb" ) )
@@ -30,19 +30,21 @@ VID_MAPS = [Train_map,Test_map]
 
 def makeList(data_dir,out_list, vid_map):
     toListFile = []
-    for d in os.listdir(data_dir):
-        for f in os.listdir(os.path.join(data_dir,d)):
-        	if f.split('.')[1] != "pkl":
-	            frame_name = d+"/"+f
-	            #Now we need to know the label of this image.
-	            frame_index = vid_map[d]
-	            print frame_name, frame_index
-	            toListFile.append((frame_name,frame_index))
-
     with open(out_list,'wb') as f:
         out = csv.writer(f, delimiter=' ')
-        for frame, index in toListFile:
-            out.writerow([frame, index])
+        for d in os.listdir(data_dir):
+            for f in os.listdir(os.path.join(data_dir,d)):
+                get_dot_jpg = f.split('.')
+                if len(get_dot_jpg) > 1 and get_dot_jpg[1] != "pkl":
+                    frame_name = d+"/"+f
+                    #Now we need to know the label of this image.
+                    frame_index = vid_map[d]
+                    #print frame_name, frame_index
+                    #toListFile.append((frame_name,frame_index))
+                    out.writerow([frame_name, frame_index])
+
+        #for frame, index in toListFile:
+        #    out.writerow([frame, index])
 
 
 

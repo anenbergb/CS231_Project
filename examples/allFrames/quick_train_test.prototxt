@@ -5,27 +5,27 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "./train_lmdb224"
+    source: "./train_lmdb_shuffle_sampled"
     backend: LMDB
     batch_size: 100
   }
   transform_param {
-    mean_file: "./mean224.binaryproto"
+    mean_file: "./mean_shuffle_sampled.binaryproto"
   }
   include: { phase: TRAIN }
 }
 layers {
-  name: "UCFff10"
+  name: "allFrames_shuffled_sampled"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "./val_lmdb224"
+    source: "./test_lmdb_shuffle_sampled"
     backend: LMDB
     batch_size: 100
   }
   transform_param {
-    mean_file: "./mean224.binaryproto"
+    mean_file: "./mean_shuffle_sampled.binaryproto"
   }
   include: { phase: TEST }
 }
@@ -100,7 +100,7 @@ layers {
   bottom: "conv2"
   top: "pool2"
   pooling_param {
-    pool: AVE
+    pool: MAX
     kernel_size: 3
     stride: 2
   }
@@ -138,7 +138,7 @@ layers {
   bottom: "conv3"
   top: "pool3"
   pooling_param {
-    pool: AVE
+    pool: MAX
     kernel_size: 3
     stride: 2
   }

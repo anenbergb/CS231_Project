@@ -27,6 +27,11 @@ same format for the following maps.
 VALID_vidmap.pkl
 TEST_vidmap.pkl
 
+usage:
+python $SRC"makeNameIndexMap.py" $UCF_FULL $VALID_FULL $TEST_FULL -f \
+./UCF_vidmap.pkl ./VALID_vidmap.pkl ./TEST_vidmap.pkl
+
+
 5. makeUCF101_class_index_map.py
 map = class_index.pkl: contains map from class name to index, and verse as well.
 map[0] = map from class name to index. map[0]['applyeyemakeup'] = 1

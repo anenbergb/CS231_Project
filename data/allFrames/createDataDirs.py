@@ -24,13 +24,18 @@ def makeDir(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-def createLinks(data_dir,dest_dir):
+def checkIfHasPklMap(fullpath_vid):
+    pklPath = os.path.join(fullpath_vid,"time_stamp_map.pkl")
+    return os.path.exists(pklPath)
+
+def createLinks(data_dir,dest_dir,num):
     makeDir(dest_dir)
-    for d in os.listdir(data_dir)[:5]:
+    for d in os.listdir(data_dir)[:num]:
         fullpath_vid = os.path.join(data_dir,d)
-        if os.path.isdir(fullpath_vid):
-            vid_link = os.path.join(dest_dir,d)
-            p = subprocess.call(['ln', '-s', fullpath_vid, vid_link])    
+        vid_link = os.path.join(dest_dir,d)
+        if not os.path.exists(vid_link):
+            if os.path.isdir(fullpath_vid) and checkIfHasPklMap(fullpath_vid):
+                p = subprocess.call(['ln', '-s', fullpath_vid, vid_link])    
 
 
 if __name__ == '__main__':
@@ -38,9 +43,12 @@ if __name__ == '__main__':
   parser.add_argument("directory", help="Data directory", type=str, nargs='+')
   parser.add_argument('-l', '--list', help="Destination directories where the \
       links to the corresponding videos in the data directory will go.", type=str, nargs='+')
-
+  #Just for experimenting before the data has been fully constructed, create links between
+  #this many files from each of the data directories.
+  # Train, Validation, Test
+  NUM_VIDS_FROM_EACH_LIST = [100000,100000,100000]
   args = parser.parse_args()
-  for directory, dest_dir in zip(args.directory,args.list):
+  for directory, dest_dir, num in zip(args.directory,args.list,NUM_VIDS_FROM_EACH_LIST):
       if os.path.exists(directory):
-          createLinks(directory,dest_dir)
+          createLinks(directory,dest_dir,num)
 

@@ -4,12 +4,12 @@
 CAFFE=/afs/cs.stanford.edu/u/anenberg/scr/caffe
 PROJECT=/afs/cs.stanford.edu/u/anenberg/scr/CS231N
 
-EXAMPLE=$PROJECT/examples/UCFff
-DATA=$PROJECT/data/UCFff
+EXAMPLE=$PROJECT/examples/allFrames
+DATA=$PROJECT/data/allFrames/lists
 TOOLS=$CAFFE/build/tools
 
-TRAIN_DATA_ROOT=/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/firstFrame_train/
-VAL_DATA_ROOT=/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/firstFrame_val/
+TRAIN_DATA_ROOT=../../data/allFrames/train/
+TEST_DATA_ROOT=../../data/allFrames/test/
 
 
 
@@ -17,7 +17,7 @@ VAL_DATA_ROOT=/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/firstF
 
 # Set RESIZE=true to resize the images to 256x256. Leave as false if images have
 # already been resized using another tool.
-RESIZE=true
+RESIZE=false
 if $RESIZE; then
   RESIZE_HEIGHT=224
   RESIZE_WIDTH=224
@@ -33,9 +33,9 @@ if [ ! -d "$TRAIN_DATA_ROOT" ]; then
   exit 1
 fi
 
-if [ ! -d "$VAL_DATA_ROOT" ]; then
-  echo "Error: VAL_DATA_ROOT is not a path to a directory: $VAL_DATA_ROOT"
-  echo "Set the VAL_DATA_ROOT variable in create_imagenet.sh to the path" \
+if [ ! -d "$TEST_DATA_ROOT" ]; then
+  echo "Error: TEST_DATA_ROOT is not a path to a directory: $TEST_DATA_ROOT"
+  echo "Set the TEST_DATA_ROOT variable in create_imagenet.sh to the path" \
        "where the ImageNet validation data is stored."
   exit 1
 fi
@@ -45,19 +45,18 @@ echo "Creating train lmdb..."
 GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
-    --shuffle \
     $TRAIN_DATA_ROOT \
-    $DATA/UCF_train.txt \
-    $EXAMPLE/train_lmdb224
+    $DATA/shuffle_sampled_train_list.txt \
+    $EXAMPLE/train_lmdb_shuffle_sampled
 
-echo "Creating val lmdb..."
+echo "Creating test lmdb..."
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
-    --shuffle \
-    $VAL_DATA_ROOT \
-    $DATA/UCF_test.txt \
-    $EXAMPLE/val_lmdb224
+    $TEST_DATA_ROOT \
+    $DATA/shuffle_sampled_test_list.txt \
+    $EXAMPLE/test_lmdb_shuffle_sampled
 
 echo "Done."
+#    --shuffle \

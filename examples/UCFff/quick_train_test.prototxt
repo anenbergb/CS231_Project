@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "./train_lmdb"
     backend: LMDB
-    batch_size: 100
+    batch_size: 1
   }
   transform_param {
     mean_file: "./mean.binaryproto"
@@ -22,7 +22,7 @@ layers {
   data_param {
     source: "./val_lmdb"
     backend: LMDB
-    batch_size: 100
+    batch_size: 4040
   }
   transform_param {
     mean_file: "./mean.binaryproto"
@@ -180,19 +180,10 @@ layers {
   }
 }
 
-layers {
-  name: "accuracy"
-  type: ACCURACY
-  bottom: "ip2"
-  bottom: "label"
-  top: "accuracy"
-  include: { phase: TEST }
-}
 
 layers {
-  name: "loss"
-  type: SOFTMAX_LOSS
+  name: "scores"
+  type: SOFTMAX
   bottom: "ip2"
-  bottom: "label"
-  top: "loss"
+  top: "scores"
 }

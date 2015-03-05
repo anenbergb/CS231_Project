@@ -67,11 +67,17 @@ def frames_from_vids(listname, dataDir):
         # /afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Validation/Frames/video_validation_0001001
         videoFramesDir = os.path.join(framesDir,name)
         if not os.path.exists(videoFramesDir):
-            #If we have not yet extracted frames for this video
-            frame_to_ts = avconv.extract_frame_ts(full_vid_path,videoFramesDir,format='jpg',resize='224x224',withTS=True)
-            pickle_save_path = os.path.join(videoFramesDir,"time_stamp_map.pkl")
-            with open(pickle_save_path,'w+') as f:
-                pickle.dump(frame_to_ts,f)
+            #Check if the video is less than 2000 seconds (approx. 33 mins)
+            duration = avconv.getDuration(full_vid_path)
+            if duration < 2000:
+                if not os.path.exists(videoFramesDir):
+                    os.makedirs(videoFramesDir)
+                    print videoFramesDir
+                    #If we have not yet extracted frames for this video
+                    frame_to_ts = avconv.extract_frame_ts(full_vid_path,videoFramesDir,format='jpg',resize='224x224',withTS=True)
+                    pickle_save_path = os.path.join(videoFramesDir,"time_stamp_map.pkl")
+                    with open(pickle_save_path,'w+') as f:
+                        pickle.dump(frame_to_ts,f)
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()

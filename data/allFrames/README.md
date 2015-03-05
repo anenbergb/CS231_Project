@@ -8,6 +8,7 @@ Goal of recognition task:
 class labels.
 [test_video_name_1] [confidence_score_class_1] [confidence_score_class_2] … [confidence_score_class_m]
 
+ZERO INDEXED: UCF101 class index definitions - 1
 
 ##########################################################################
 ##########################################################################
