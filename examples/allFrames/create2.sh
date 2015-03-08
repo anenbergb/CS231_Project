@@ -46,8 +46,8 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
     $TRAIN_DATA_ROOT \
-    $DATA/train_list.txt \
-    $EXAMPLE/train_lmdb
+    $DATA/shuffle_sampled_100_train_list.txt \
+    $EXAMPLE/train_lmdb_shuffle_sampled_100
 
 echo "Creating test lmdb..."
 
@@ -55,8 +55,8 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
     --resize_width=$RESIZE_WIDTH \
     $TEST_DATA_ROOT \
-    $DATA/test_list.txt \
-    $EXAMPLE/test_lmdb
+    $DATA/shuffle_sampled_100_test_list.txt \
+    $EXAMPLE/test_lmdb_shuffle_sampled_100
 
 echo "Done."
 #    --shuffle \

@@ -22,7 +22,7 @@ layers {
   data_param {
     source: "./test_lmdb_shuffle_sampled"
     backend: LMDB
-    batch_size: 100
+    batch_size: 1
   }
   transform_param {
     mean_file: "./mean_shuffle_sampled.binaryproto"

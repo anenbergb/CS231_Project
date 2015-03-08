@@ -16,6 +16,9 @@ SRC="../../code/"
 #python $SRC"makeNameIndexMap.py" $UCF_FULL $VALID_FULL $TEST_FULL -f ./UCF_vidmap.pkl ./VALID_vidmap.pkl ./TEST_vidmap.pkl -z
 
 
+
+
+
 #python $SRC"extractFrames.py" $VALID_DIR $TEST_DIR -l $VALID_FULL $TEST_FULL
 
 
@@ -41,11 +44,14 @@ thisTestList="./Test_list2.txt"
 thisTrainListDir="./train_lists"
 thisTestListDir="./test_lists"
 
-python makeListsByVideo.py $thisTrainDir $thisTestDir -l $thisTrainListDir $thisTestListDir
+#python makeListsByVideo.py $thisTrainDir $thisTestDir -l $thisTrainListDir $thisTestListDir
 
 
 
 
 
 
+CLASS_INDEX="/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/ucfTrainTestlist/classInd.txt"
+CLASS_INDEX_OUT="./class_index"
 
+python $SRC"makeUCF101_class_index_map.py" $CLASS_INDEX $CLASS_INDEX_OUT -p -z
