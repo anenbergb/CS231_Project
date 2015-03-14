@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( brox_optical_flow )
+find_package( OpenCV REQUIRED )
+add_executable( brox_optical_flow brox_optical_flow.cpp )
+target_link_libraries( brox_optical_flow ${OpenCV_LIBS} )

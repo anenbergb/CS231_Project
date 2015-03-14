@@ -1,0 +1,4 @@
+Training:
+71536 consecutive_5samples_10frames_train_list.txt
+
+7800 consecutive_5samples_10frames_test_list.txt

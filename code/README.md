@@ -38,6 +38,22 @@ map[0] = map from class name to index. map[0]['applyeyemakeup'] = 1
 map[1] = map from class index to the class
 
 
+5. ShotDetection notebook / shotDetection.py
+Using the ShotDetect software to detect the transitions scene transitions
+https://github.com/johmathe/Shotdetect
+
+This software yields a list of frames numbers which mark the boundaries between scenes.
+
+6. OpenCV optical flow computation
+./OpenCV
+editing OpenCV Mat structures
+http://docs.opencv.org/modules/core/doc/basic_structures.html
+
+OpticalFlow ipython notebook: basic experiments computing optical flow using the opencv code
+
+computeOpticalFlow.py script to compute the optical flow of UCF101 videos.
+
+
 
 Simple bash loop:
 for d in $UCF_Frames

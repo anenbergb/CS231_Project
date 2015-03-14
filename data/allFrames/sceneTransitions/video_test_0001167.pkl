@@ -1,0 +1,17 @@
+(lp0
+I10
+aI16
+aI18
+aI22
+aI24
+aI26
+aI28
+aI30
+aI158
+aI160
+aI162
+aI190
+aI208
+aI214
+aI3000
+a.

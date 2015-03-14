@@ -20,3 +20,13 @@ Training list:
 Testing list:
 ../../data/allFrames/lists/fullpath_shuffle_sampled_100_test_list.txt
 156800
+
+
+UCF videos
+Training list:
+../../data/allFrames/lists/UCF_train_list.txt
+9437
+
+Testing list:
+../../data/allFrames/lists/UCF_test_list.txt
+3755
