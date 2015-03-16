@@ -9,6 +9,6 @@ display: 20
 max_iter: 40000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 10000
-snapshot_prefix: "./snapshots/run3"
+snapshot: 1000
+snapshot_prefix: "./snapshots/fine_from20k"
 solver_mode: GPU

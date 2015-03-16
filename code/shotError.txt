@@ -1,0 +1,53 @@
+Shot log :: Processing movie.
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Validation/videos/video_validation_0000006.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Google
+  Duration: 00:03:58.23, start: 0.000000, bitrate: 2191 kb/s
+    Stream #0.0(und): Video: h264 (High), yuv420p, 320x180, 2053 kb/s, 30 fps, 30 tbr, 30 tbn, 60 tbc
+    Stream #0.1(und): Audio: aac, 44100 Hz, stereo, s16, 127 kb/s
+frame:: 23
+frame:: 47
+frame:: 71
+frame:: 98
+frame:: 125
+frame:: 158
+frame:: 300
+frame:: 304
+frame:: 359
+frame:: 364
+frame:: 369
+frame:: 457
+frame:: 556
+frame:: 813
+frame:: 895
+frame:: 1197
+frame:: 1306
+frame:: 1468
+frame:: 1679
+frame:: 1875
+frame:: 1993
+frame:: 2108
+frame:: 2592
+frame:: 2879
+frame:: 3065
+frame:: 3340
+frame:: 3739
+frame:: 4000
+frame:: 4097
+frame:: 4508
+frame:: 4879
+frame:: 5135
+frame:: 5704
+frame:: 5829
+frame:: 6026
+frame:: 6036
+frame:: 6167
+frame:: 6342
+frame:: 6590
+frame:: 6765
+frame:: 6839
+frame:: 6948
+frame:: 7055

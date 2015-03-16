@@ -2,6 +2,6 @@
 CAFFE=/afs/cs.stanford.edu/u/anenberg/scr/caffe
 
 
-$CAFFE/build/tools/caffe train -solver ./quick_solver.prototxt -weights $CAFFE"/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel" -gpu 2
+#$CAFFE/build/tools/caffe train -solver ./quick_solver.prototxt -weights $CAFFE"/models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel" -gpu 2
 
-#$CAFFE/build/tools/caffe train -solver ./quick_solver.prototxt
+$CAFFE/build/tools/caffe train -solver ./quick_solver.prototxt -weights ./snapshots/fine_iter_20000.caffemodel -gpu 2
