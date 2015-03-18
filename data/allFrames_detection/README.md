@@ -13,6 +13,7 @@ The data in this directory is for the localization task.
 
 * At the data server there exists a subdirectory "annotation" that contains 
 * .txt files with 
+(original password: THUMOS14_REGISTERED)
 
 temporal locations of instances of one class. Each row denotes 
 one instance with the following format:
@@ -87,6 +88,11 @@ Labeling convention:
 
 Description of the files in this directory
 
+#map from video name to UCF101 index.
+VALID_vidmap
+TEST_vidmap
+
+
 
 1. prepareData.sh
     Script used to execute the codes.
@@ -101,11 +107,14 @@ Description of the files in this directory
 	map[1] = map from class index to the class
 	map[2] = map from UCF_id to class_id
 
+detection_class_index.pkl
+
 2. makeVid_class_index_map.py
 	Script that uses the temporal annotations to construct a map:
 	map[videoname][time_stamp] = class_id
-	#time stamp is a float in 0.1 precision.
+	time stamp is a float in 0.1 precision.
 
+["./VALID_TSmap.pkl","./TEST_TSmap.pkl"]
 
 
 
