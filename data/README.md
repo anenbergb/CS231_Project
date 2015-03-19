@@ -22,13 +22,13 @@ Subdirectories:
 
 
 2. CS231N/data directory
-	1. 
-		Each project contains a /Train and a /Test directory.
+	1. allFrames
+		Each project contains a /train and a /test directory.
 		Each directory contains symbolic links to the data stored at on the server.
 		e.g.
 		Train/v_ApplyEyeMakeup_g08_c01 is a symbolic link to 
 			/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/Frames/v_ApplyEyeMakeup_g08_c01
-	2. Train_list.txt
+	2. lists.
 		List of image to id with the following format.
 		[video_name/%08d] [class_id]
 		

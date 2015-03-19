@@ -1,5 +1,26 @@
 # CS231_Project
 
+Project Organization:
+
+/code: mostly code for preprocessing the data. 
+    * shotdetect (dependencies not included)
+    * tubelets (dependencies not included)
+    * optical flow
+/data: 
+    * directories where we reformat the video to be a collection of frames and create lists of frame to class_id.
+		[video_name/%08d] [class_id]
+    * allFrames is the only directory used for the final experiments.
+
+/examples:
+    * directories that contain Caffe files. Usually each directory contains its necessary Caffe .prototxt files
+
+.
+    * random assortment of files and notebooks that are not well organized.
+    * optFlow0.py: files used to compute the optical flow at some point.
+    
+
+
+
 Data:
 
 (Action Recognition)
@@ -37,15 +58,5 @@ Project goal:
 The project hopes to achieve two goals: Action Recognition and Temporal Action Detection.
 
 Use a CNN trained on the training and validation data to output a real valued score indicating the confidence of the precense of each action class in a test video.
-
-Project approach:
-
-Step 1: Train a CNN on only the training data set (UCF action data set) to perform action recognition on the UCF data set. First iteration of this model will be trained using only the first frame from each video.
-
-Step 2: Train CNN on the training and validation data sets using only the first frame from each video and test on a held out portion of the validation data set.
-
-Step 3: Implement a more elaborate CNN architecture, similar to two-stream CNN architecture proposed by Karen Simonyan and Andrew Zisserman. Report performance using the spatial stream, and then the combined performance with the temporal stream.
-
-Step 4: Experiment with a new CNN trained on single video frames that have been identified using tubelet preprocessing. For each video, the tubelet extraction yields K tubelets, which are sequences of bounding boxes over a set range of frames. Each tubelet proposes a candidate spatio-temporal localization of an action. The most promising tubelets inform us on where to sample the frames from the video.
 
 
