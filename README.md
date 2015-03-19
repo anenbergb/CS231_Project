@@ -1,4 +1,4 @@
-# CS231N_Project
+# CS231_Project
 
 Data:
 
