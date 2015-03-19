@@ -89,8 +89,10 @@ Labeling convention:
 Description of the files in this directory
 
 #map from video name to UCF101 index.
+UCF_vidmap: the minimum index is 1, max 101.
 VALID_vidmap
 TEST_vidmap
+
 
 
 

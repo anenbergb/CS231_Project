@@ -17,15 +17,14 @@ import subprocess, os, pickle, csv, argparse
 #detection_class_index = pickle.load( open("./detection_class_index.pkl","rb"))
 
 
-    
-VALID_TSmap_PATH = "./VALID_TSmap.pkl"
-TEST_TSmap_PATH = "./TEST_TSmap.pkl"
-UCF_vidmap_PATH = "./UCF_vidmap.pkl"
 
-VALID_TSmap = pickle.load( open(VALID_TSmap_PATH, "rb" ) )
-TEST_TSmap = pickle.load( open(TEST_TSmap_PATH, "rb" ) )
+VALID_TSmap = pickle.load( open("./VALID_TSmap.pkl", "rb" ) )
+TEST_TSmap = pickle.load( open("./TEST_TSmap.pkl", "rb" ) )
+UCF_vidmap = pickle.load( open("./UCF_vidmap.pkl", "rb" ) )[1]
+detection_class_index = pickle.load( open("./detection_class_index.pkl", "rb" ) )
 
-UCF_vidmap = pickle.load( open(UCF_vidmap_PATH, "rb" ) )[1]
+
+
 
 
 VID_MAPS = [(UCF_vidmap,VALID_TSmap),TEST_TSmap]
@@ -48,7 +47,8 @@ def makeTestList(data_dir, vid_map):
                     #print frame_name, frame_index
                     toListFile.append((frame_name,class_id))
     return toListFile
-        
+
+
 def makeTrainList(data_dir, map_tuple):
     UCF_vidmap = map_tuple[0]
     VAL_TSmap = map_tuple[1]

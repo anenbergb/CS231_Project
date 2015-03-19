@@ -28,12 +28,12 @@ UCF_FRAMES="/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Training/Frames/"
 VALID_FRAMES="/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Validation/Frames/"
 TEST_FRAMES="/afs/cs.stanford.edu/group/cvgl/rawdata/THUMOS2014/Test/Frames/"
 
-thisTrainDir="../allFrames/Train"
-thisTestDir="../allFrames/Test"
+thisTrainDir="../allFrames/train"
+thisTestDir="../allFrames/test"
 
 
-thisTrainList="./Train_list.txt"
-thisTestList="./Test_list.txt"
+thisTrainList="./train_list.txt"
+thisTestList="./test_list.txt"
 
 python makeLists.py $thisTrainDir $thisTestDir -l $thisTrainList $thisTestList
 

@@ -7,6 +7,4 @@
 *.log
 *.old
 data/allFrames/lists/*
-data/allFrames_detection/Train_list.txt
-data/allFrames_detection/Test_list.txt
-*.txt
+data/allFrames_detection/lists*
